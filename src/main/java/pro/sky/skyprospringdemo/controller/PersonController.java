@@ -16,13 +16,12 @@ public class PersonController {
 
     @GetMapping(path = "/person")
     public String getPersonInfo(@RequestParam("number") Integer number) {
+        final String person;
         try {
-            return personService.getPerson(number);
+            person = personService.getPerson(number);
         } catch (BadPersonNumberException e) {
-            return "Please, try another number";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Please, try later";
+            throw new RuntimeException(e);
         }
+        return person;
     }
 }

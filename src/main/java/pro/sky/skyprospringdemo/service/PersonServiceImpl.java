@@ -46,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public String getPerson(Integer number) {
+    public String getPerson(Integer number) throws BadPersonNumberException {
         final Person person;
         if (number >= persons.length) {
             throw new BadPersonNumberException("Person number is greater than array size");
