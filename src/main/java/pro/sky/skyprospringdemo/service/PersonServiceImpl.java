@@ -39,12 +39,12 @@ public class PersonServiceImpl implements PersonService {
                     "2345",
                     1)
     );
-    String[] professions = {
+    List<String> professions = List.of
+            (
             "unemployed",
             "driver",
             "woodworker",
-            "carpenter"
-    };
+            "carpenter");
 
 
     @Override
@@ -58,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
                 + person.getName() + " "
                 + person.getSurName() + " "
                 + person.getPassport() + " "
-                + professions[person.getProfessionNumber()];
+                + professions.get(person.getProfessionNumber());
         return personDescription;
     }
 }
