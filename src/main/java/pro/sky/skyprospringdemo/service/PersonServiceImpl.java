@@ -6,9 +6,11 @@ import pro.sky.skyprospringdemo.domain.Person;
 import pro.sky.skyprospringdemo.domain.TruckDriver;
 import pro.sky.skyprospringdemo.exceptions.BadPersonNumberException;
 
+import java.util.List;
+
 @Service
 public class PersonServiceImpl implements PersonService {
-    Person[] persons = {
+    List<Person> persons = List.of(
             new Person(
                     "Jean",
                     "Renault",
@@ -36,7 +38,7 @@ public class PersonServiceImpl implements PersonService {
                     "1000",
                     "2345",
                     1)
-    };
+    );
     String[] professions = {
             "unemployed",
             "driver",
@@ -48,11 +50,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public String getPerson(Integer number) throws BadPersonNumberException {
         final Person person;
-        if (number >= persons.length) {
+        if (number >= persons.size()) {
             throw new BadPersonNumberException("Person number is greater than array size");
         }
-
-        person = persons[number];
+        person = persons.get(number);
         final String personDescription = ""
                 + person.getName() + " "
                 + person.getSurName() + " "
