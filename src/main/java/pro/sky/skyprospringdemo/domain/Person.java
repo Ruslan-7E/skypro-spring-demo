@@ -2,13 +2,13 @@ package pro.sky.skyprospringdemo.domain;
 
 public class Person {
     private String name;
-    private String surName;
+    private String surname;
     private String passport;
     private int professionNumber;
 
-    public Person(String name, String surName, String passport, int professionNumber) {
+    public Person(String name, String surname, String passport, int professionNumber) {
         this.name = name;
-        this.surName = surName;
+        this.surname = surname;
         this.passport = passport;
         this.professionNumber = professionNumber;
     }
@@ -21,12 +21,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPassport() {
