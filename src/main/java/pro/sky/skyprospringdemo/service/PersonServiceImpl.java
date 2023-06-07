@@ -6,8 +6,8 @@ import pro.sky.skyprospringdemo.domain.Person;
 import pro.sky.skyprospringdemo.domain.TruckDriver;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -61,6 +61,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public void addProfession(String passport, Integer profession) {
+        final Person person = persons.get(passport);
+        if (person == null) {
+            throw new RuntimeException("Person with that number isn't found!");
+        }
+        person.getProfessionNumbers().add(profession);
+
+    }
+
+    @Override
     public String getPersonByPassport(String passport) {
         final Person person = persons.get(passport);
         if (person == null) {
@@ -74,7 +84,7 @@ public class PersonServiceImpl implements PersonService {
         return personDescription;
     }
 
-    private String getProfessionNames(List<Integer> professionNumbers) {
+    private String getProfessionNames(Set<Integer> professionNumbers) {
         String result = "";
         for (Integer professionNumber : professionNumbers) {
             result = result + " " + professions[professionNumber];

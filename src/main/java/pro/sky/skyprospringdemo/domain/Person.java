@@ -1,19 +1,21 @@
 package pro.sky.skyprospringdemo.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Person {
     private String name;
     private String surname;
     private String passport;
-    private List<Integer> professionNumbers;
+    private Set<Integer> professionNumbers;
 
     public Person(String name, String surname, String passport, int professionNumber) {
         this.name = name;
         this.surname = surname;
         this.passport = passport;
-        this.professionNumbers = new ArrayList<>(List.of(professionNumber));
+        this.professionNumbers = new HashSet<>(List.of(professionNumber));
     }
 
     public String getName() {
@@ -36,7 +38,7 @@ public class Person {
         return passport;
     }
 
-    public List<Integer> getProfessionNumbers() {
+    public Set<Integer> getProfessionNumbers() {
         return professionNumbers;
     }
 

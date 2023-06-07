@@ -21,6 +21,13 @@ public class PersonController {
         return personService.getPersonByPassport(passport);
     }
 
+    @GetMapping(path = "/person/profession/add")
+    public String addProfession(@RequestParam("passport") String passport,
+                                @RequestParam("profession") Integer profession) {
+        personService.addProfession(passport, profession);
+        return "Profession has been added successfully!";
+    }
+
     @GetMapping(path = "/person/add")
     public String addPerson(@RequestParam("name") String name,
                             @RequestParam("surname") String surname,
