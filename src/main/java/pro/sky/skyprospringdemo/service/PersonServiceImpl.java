@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.skyprospringdemo.domain.Driver;
 import pro.sky.skyprospringdemo.domain.Person;
 import pro.sky.skyprospringdemo.domain.TruckDriver;
-import pro.sky.skyprospringdemo.exceptions.BadPersonNumberException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,13 +45,14 @@ public class PersonServiceImpl implements PersonService {
                     "2345",
                     1)
     ));
-    List<String> professions = List.of
-            (
+    String[] professions =
+            {
                     "unemployed",
                     "driver",
                     "woodworker",
-                    "carpenter"
-            );
+                    "carpenter",
+                    "actor"
+            };
 
 
     @Override
@@ -71,8 +70,16 @@ public class PersonServiceImpl implements PersonService {
                 + person.getName() + " "
                 + person.getSurname() + " "
                 + person.getPassport() + " "
-                + professions.get(person.getProfessionNumber());
+                + getProfessionNames(person.getProfessionNumbers());
         return personDescription;
+    }
+
+    private String getProfessionNames(List<Integer> professionNumbers) {
+        String result = "";
+        for (Integer professionNumber : professionNumbers) {
+            result = result + " " + professions[professionNumber];
+        }
+        return result;
     }
 }
 
