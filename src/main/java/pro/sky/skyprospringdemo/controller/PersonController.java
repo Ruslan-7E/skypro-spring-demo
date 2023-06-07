@@ -24,7 +24,7 @@ public class PersonController {
 
     @GetMapping(path = "/person/by-passport")
     public String getPersonInfo(@RequestParam("passport") String passport) {
-        return "Human that was returned by passport number.";
+        return personService.getPersonByPassport(passport);
     }
 
     @GetMapping(path = "/person/add")
