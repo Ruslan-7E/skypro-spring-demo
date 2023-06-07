@@ -7,32 +7,39 @@ import pro.sky.skyprospringdemo.domain.TruckDriver;
 import pro.sky.skyprospringdemo.exceptions.BadPersonNumberException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PersonServiceImpl implements PersonService {
-    List<Person> persons = new ArrayList<>(List.of(
+    Map<String, Person> persons = new HashMap<>(Map.of(
+            "12345",
             new Person(
                     "Jean",
                     "Renault",
                     "12345",
                     2),
+            "54321",
             new Person(
                     "Luke",
                     "Besson",
                     "54321",
                     3),
+            "41232",
             new Person(
                     "Gerard",
                     "Depardier",
                     "41232",
                     0),
+            "928374",
             new Driver(
                     "Jason",
                     "Statham",
                     "928374",
                     "3491",
                     1),
+            "1000",
             new TruckDriver(
                     "Robert",
                     "Patrick",
@@ -42,20 +49,24 @@ public class PersonServiceImpl implements PersonService {
     ));
     List<String> professions = List.of
             (
-            "unemployed",
-            "driver",
-            "woodworker",
-            "carpenter"
+                    "unemployed",
+                    "driver",
+                    "woodworker",
+                    "carpenter"
             );
 
 
     @Override
-    public String getPerson(Integer number) throws BadPersonNumberException {
-        final Person person;
-        if (number >= persons.size()) {
-            throw new BadPersonNumberException("Person number is greater than array size");
+    public void addPerson(Person person) {
+        persons.put(person.getPassport(), person);
+    }
+
+    @Override
+    public String getPersonByPassport(String passport) {
+        final Person person = persons.get(passport);
+        if (person == null) {
+            throw new RuntimeException("Person with that number isn't found!");
         }
-        person = persons.get(number);
         final String personDescription = ""
                 + person.getName() + " "
                 + person.getSurname() + " "
@@ -63,24 +74,5 @@ public class PersonServiceImpl implements PersonService {
                 + professions.get(person.getProfessionNumber());
         return personDescription;
     }
-
-    @Override
-    public void addPerson(Person person) {
-        persons.add(person);
-    }
-
-    @Override
-    public String getPersonByPassport(String passport) {
-        for (Person person : persons) {
-            if (person.getPassport().equals(passport)) {
-                final String personDescription = ""
-                        + person.getName() + " "
-                        + person.getSurname() + " "
-                        + person.getPassport() + " "
-                        + professions.get(person.getProfessionNumber());
-                return personDescription;
-            }
-        }
-        throw new RuntimeException("Person with that number isn't found!");
-    }
 }
+

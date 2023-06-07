@@ -15,12 +15,6 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping(path = "/person")
-    public String getPersonInfo(@RequestParam("number") Integer number) {
-        final String person;
-        person = personService.getPerson(number);
-        return person;
-    }
 
     @GetMapping(path = "/person/by-passport")
     public String getPersonInfo(@RequestParam("passport") String passport) {
