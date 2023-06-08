@@ -5,9 +5,7 @@ import pro.sky.skyprospringdemo.domain.Driver;
 import pro.sky.skyprospringdemo.domain.Person;
 import pro.sky.skyprospringdemo.domain.TruckDriver;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -54,6 +52,27 @@ public class PersonServiceImpl implements PersonService {
                     "actor"
             };
 
+    public List<Person> getPersonsByProfession(Integer professionNumber) {
+        List<Person> result = new ArrayList<>();
+        for (Person person : persons.values()) {
+            if (person.getProfessionNumbers().contains(professionNumber)) {
+                result.add(person);
+            }
+        }
+        return result;
+    }
+
+    // метод ниже возвращает все допустимые профессии у экземпляра класса из списка профессий
+    @Override
+    public List<Person> getPersonsByProfessions(List<Integer> professionNumbers) {
+        List<Person> result = new ArrayList<>();
+        for (Person person : persons.values()) {
+            if (person.getProfessionNumbers().containsAll(professionNumbers)) {
+                result.add(person);
+            }
+        }
+        return result;
+    }
 
     @Override
     public void addPerson(Person person) {
