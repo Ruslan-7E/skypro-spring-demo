@@ -52,6 +52,14 @@ public class PersonServiceImpl implements PersonService {
                     "actor"
             };
 
+    Map<String, Integer> professionsCodes = Map.of(
+            "unemployed", 0,
+            "driver", 1,
+            "woodworker", 2,
+            "carpenter", 3,
+            "actor", 4
+    );
+
     public List<Person> getPersonsByProfession(Integer professionNumber) {
         List<Person> result = new ArrayList<>();
         for (Person person : persons.values()) {
