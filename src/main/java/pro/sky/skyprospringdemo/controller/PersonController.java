@@ -50,9 +50,15 @@ public class PersonController {
     public String getByProfession(@RequestParam("profession") int profession) {
         final List<Person> personsByProfession = personService.getPersonsByProfession(profession);
         final List<String> passports = new ArrayList<>();
-        for (final Person person : personsByProfession) {
+
+//        for (final Person person : personsByProfession) {
+//            passports.add(person.getPassport());
+//        }
+
+        personsByProfession.forEach(person -> {
             passports.add(person.getPassport());
-        }
+        });
+
         return passports.toString();
     }
 }
