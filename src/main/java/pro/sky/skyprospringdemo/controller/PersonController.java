@@ -7,6 +7,9 @@ import pro.sky.skyprospringdemo.domain.Person;
 import pro.sky.skyprospringdemo.exceptions.BadPersonNumberException;
 import pro.sky.skyprospringdemo.service.PersonService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class PersonController {
     private final PersonService personService;
@@ -32,8 +35,7 @@ public class PersonController {
     public String addPerson(@RequestParam("name") String name,
                             @RequestParam("surname") String surname,
                             @RequestParam("passport") String passport,
-                            @RequestParam("profession") Integer professionNumber)
-    {
+                            @RequestParam("profession") Integer professionNumber) {
         Person person = new Person(
                 name,
                 surname,
@@ -44,5 +46,13 @@ public class PersonController {
         return "Person added successfully!";
     }
 
-
+    @GetMapping(path = "/persons/by-profession")
+    public String getByProfession(@RequestParam("profession") int profession) {
+        final List<Person> personsByProfession = personService.getPersonsByProfession(profession);
+        final List<String> passports = new ArrayList<>();
+        for (final Person person : personsByProfession) {
+            passports.add(person.getPassport());
+        }
+        return passports.toString();
+    }
 }

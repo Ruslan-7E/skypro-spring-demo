@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PersonService {
 
+    List<Person> getPersonsByProfession(Integer professionNumber);
+
     // метод ниже возвращает все допустимые профессии у экземпляра класса из списка профессий
     List<Person> getPersonsByProfessions(List<Integer> professionNumbers);
 

@@ -60,6 +60,7 @@ public class PersonServiceImpl implements PersonService {
             "actor", 4
     );
 
+    @Override
     public List<Person> getPersonsByProfession(Integer professionNumber) {
         List<Person> result = new ArrayList<>();
         for (Person person : persons.values()) {
