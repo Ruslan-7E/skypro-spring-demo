@@ -9,6 +9,7 @@ import pro.sky.skyprospringdemo.service.PersonService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class PersonController {
@@ -55,10 +56,11 @@ public class PersonController {
 //            passports.add(person.getPassport());
 //        }
 
-        personsByProfession.forEach(person -> {
-            passports.add(person.getPassport());
-        });
+        final List<String> streamPassports = personsByProfession.stream()
+                .map(Person::getPassport)
+                .map(passport -> "~" + passport + "~")
+                .collect(Collectors.toList());
 
-        return passports.toString();
+        return streamPassports.toString();
     }
 }
